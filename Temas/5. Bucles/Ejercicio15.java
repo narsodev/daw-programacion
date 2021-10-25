@@ -9,12 +9,12 @@ import java.util.Scanner;
 public class Ejercicio15 {
   public static void main(String[] args) {
     Scanner s = new Scanner(System.in);
-    double base;
+    int base;
     int exponente;
-    double resultado = 1;
+    int resultado = 1;
 
     System.out.print("Base: ");
-    base = s.nextDouble();
+    base = s.nextInt();
 
     System.out.print("Exponente: ");
     exponente = s.nextInt();
@@ -22,11 +22,8 @@ public class Ejercicio15 {
     s.close();
 
     for (int i = 1; i <= exponente; i++) {
-      resultado = 1;
-      for (int j = 0; j < i; j++) {
-        resultado *= base;
-      }
-      System.out.printf("%.2f ^ %d = %.2f\n", base, i, resultado);
+      resultado *= base;
+      System.out.printf("%d ^ %d = %d\n", base, i, resultado);
     }
   }
 }
