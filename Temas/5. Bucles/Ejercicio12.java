@@ -6,22 +6,18 @@ introducir por teclado. */
 public class Ejercicio12 {
   public static void main(String[] args) {
     int numFinal;
+    int num1 = 1;
+    int num2 = -1;
 
     System.out.print("Introduzca el número: ");
     numFinal = Integer.parseInt(System.console().readLine());
 
-    if (numFinal > 0) System.out.println(0);
-
-    if (numFinal > 1) {
-      int num1 = 0;
-      int num2 = 1;
-
-      for (int i = 1; i < numFinal; i++) {
-        int suma = num1 + num2;
-        System.out.println(suma);
-        num2 = num1;
-        num1 = suma;
-      }
+    for (int i = 1; i <= numFinal; i++) {
+      int suma = num1 + num2;
+      System.out.println(suma);
+      num2 = num1;
+      num1 = suma;
     }
   }
 }
+
