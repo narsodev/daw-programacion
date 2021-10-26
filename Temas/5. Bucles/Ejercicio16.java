@@ -17,7 +17,7 @@ public class Ejercicio16 {
     if (num <= 1) primo = false;
 
     int i = 2;
-    while (primo && i < (num / 2)) {
+    while (primo && i < num / 2) {
       if (num % i == 0) primo = false;
       i++;
     }
