@@ -13,11 +13,10 @@ public class EjercicioExtra_AnilloNumerico {
       numeroPintado = mitad;
 
       for (int j = 1; j <= size; j++) {
-        System.out.print(numeroPintado + " ");
+        System.out.print(numeroPintado % 10 + " ");
 
         if (i + 1 > mitad) minimo = i - mitad + 2;
         else minimo = mitad - i;
-
 
         if (numeroPintado > minimo && j < mitad) numeroPintado--;
         else if (i + 1 > mitad) {
