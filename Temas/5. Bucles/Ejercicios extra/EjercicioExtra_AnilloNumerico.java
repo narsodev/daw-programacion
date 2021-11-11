@@ -2,8 +2,12 @@ public class EjercicioExtra_AnilloNumerico {
   public static void main(String[] args) {
     int size, mitad, minimo, numeroPintado;
 
-    System.out.print("Introduzca el tamaño del anillo (impar): ");
-    size = Integer.parseInt(System.console().readLine());
+    System.out.print("Introduzca el tamaño máximo que podrá tener el anillo (impar): ");
+    size = (int) (Math.random() * Integer.parseInt(System.console().readLine()));
+    
+    size += size % 2 == 0 ? 1 : 0;
+
+    System.out.println("\nEl tamaño generado aleatoriamente es: " + size);
 
     System.out.println();
 
