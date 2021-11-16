@@ -24,7 +24,6 @@ public class Ejercicio32 {
     int longitud;
     int posicion = 0;
     String caracter = "";
-    boolean existeObstaculo, obstaculoPintado;
     int posicionObstaculo;
 
     System.out.print("Introduzca la longitud del sendero en metros: ");
@@ -44,7 +43,7 @@ public class Ejercicio32 {
         System.out.print(caracter);
       }
       System.out.print("|\n");
-      
+
       posicion += (int) (Math.random() * 3) - 1;
     }
   }
