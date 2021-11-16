@@ -19,7 +19,6 @@ public class Ejercicio22 {
   public static void main(String[] args) {
     int longitud;
     int posicion = 13;
-    int aux;
 
     System.out.print("Por favor, introduzca la longitud de la serpiente en caracteres contando la cabeza: ");
     longitud = Integer.parseInt(System.console().readLine());
@@ -30,8 +29,7 @@ public class Ejercicio22 {
       }
       System.out.println();
 
-      aux = (int) (Math.random() * 3);
-      posicion += aux == 0 ? 0 : aux == 1 ? 1 : -1;
+      posicion += (int) (Math.random() * 3) - 1;
     }
   }
 }
