@@ -27,9 +27,23 @@ el array resultado.
 public class Ejercicio28 {
   public static void main(String[] args) {
     int size;
+    int[] array;
 
     System.out.print("Introduzca el tamaño del array: ");
     size = Integer.parseInt(System.console().readLine());
 
+    array = new int[size];
+
+    System.out.println("\nArray original:");
+    for (int i = 0; i < size; i++) {
+      int num = (int) (Math.random() * 201);
+      System.out.printf("%d ", num);
+
+      if (i % 2 == 0) array[i / 2] = num;
+      else array[size - i / 2 - 1] = num;
+    }
+
+    System.out.println("\nArray resultado:");
+    for (int i = 0; i < size; i++) System.out.printf("%d ", array[i]);
   }
 }
