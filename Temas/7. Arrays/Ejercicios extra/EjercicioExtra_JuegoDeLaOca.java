@@ -1,33 +1,32 @@
-/* 
-  Rojo: 0
-  Verde: 1
-  Amarillo: 2
-  Azul: 3
-*/
 public class EjercicioExtra_JuegoDeLaOca {
-  static final int[] POSICIONES_OCA_A_OCA = { 4, 8, 13, 17, 22, 26, 31, 35, 40, 44, 49, 53, 58, 62 };
+  static final int TABLERO_SIZE = 63;
+  static final int[] POSICIONES_OCA_A_OCA = { 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, 63 };
   static final String[] JUGADORES = { "rojo", "verde", "amarillo", "azul" };
 
-  public static void imprimirTablero(int[] tablero, int[] posicionesJugadores ) {
-    for (int casilla = 0; casilla < 63; casilla++) {
+  public static int comprobarSiEsOcaAOca(int posicion) {
+    int siguienteOcaAOca = -1;
+    int contadorOcaAOca = 0;
+      while (siguienteOcaAOca == -1 && contadorOcaAOca < POSICIONES_OCA_A_OCA.length) {
+        if (posicion == POSICIONES_OCA_A_OCA[contadorOcaAOca] && posicion != TABLERO_SIZE) {
+          siguienteOcaAOca = POSICIONES_OCA_A_OCA[contadorOcaAOca + 1];
+        } else contadorOcaAOca++;
+      }
+    return siguienteOcaAOca;
+  }
+
+  public static void imprimirTablero(int[] posicionesJugadores) {
+    for (int casilla = 0; casilla <= TABLERO_SIZE; casilla++) {
       System.out.println("------");
       System.out.print("| ");
       
-      boolean esOcaAOcaImprimir = false;
-      int contadorOcaAOca = 0;
-      while (!esOcaAOcaImprimir && contadorOcaAOca < POSICIONES_OCA_A_OCA.length) {
-        if (casilla == POSICIONES_OCA_A_OCA[contadorOcaAOca]) {
-          esOcaAOcaImprimir = true;
-          System.out.print("OCA");
-        }
-        contadorOcaAOca++;
-      }
-
-      if (!esOcaAOcaImprimir) System.out.printf("%-3d", casilla + 1);
+      if (casilla == 0) System.out.print("SAL");
+      else if (casilla == TABLERO_SIZE) System.out.print("FIN");
+      else if (comprobarSiEsOcaAOca(casilla) != -1) System.out.print("OCA");
+      else System.out.printf("%-3d", casilla);
 
       System.out.print(" |");
-      for (int jugadorImprimir = 0; jugadorImprimir < 4; jugadorImprimir++) {
-        if (casilla == posicionesJugadores[jugadorImprimir]) System.out.print(JUGADORES[jugadorImprimir] + " ");
+      for (int jugador = 0; jugador < 4; jugador++) {
+        if (casilla == posicionesJugadores[jugador]) System.out.print(JUGADORES[jugador] + " ");
       }
       System.out.println();
     }
@@ -35,48 +34,56 @@ public class EjercicioExtra_JuegoDeLaOca {
     System.out.println();
   }
 
-  public static void main(String[] args) throws Exception {
-    int[] tablero = new int [63];
+  public static void main(String[] args) {
     int[] posicionesJugadores = { 0, 0, 0, 0 };
-    boolean juegoFuncionando = true;
-    int ganador = 5;
+    int ganador = -1;
 
-    for (int casilla = 0; casilla < 63; casilla++) tablero[casilla] = 0;
-
-    imprimirTablero(tablero, posicionesJugadores);
+    imprimirTablero(posicionesJugadores);
 
     do {
-      for (int jugador = 0; jugador < 4; jugador++) {
-        System.out.println("Turno del color " + JUGADORES[jugador]);
-        System.out.print("Se lanza el dado: ");
+      int jugador = 0;
+
+      do {
+        System.out.printf("Turno del color %s.\n", JUGADORES[jugador]);
+
+        System.out.println("ENTER para lanzar el dado.");
+        System.console().readLine();
+        
         int dado = (int) (Math.random() * 6) + 1;
-        posicionesJugadores[jugador] += dado;
-        Thread.sleep(500);
-        System.out.println(dado);
-  
-        boolean esOcaAOca = false;
-        int contadorOcaAOca = 0;
-        while (!esOcaAOca && contadorOcaAOca < POSICIONES_OCA_A_OCA.length) {
-          if (posicionesJugadores[jugador] == POSICIONES_OCA_A_OCA[contadorOcaAOca]) {
-            esOcaAOca = true;
-            System.out.println("De oca a oca y tiro porque me toca!!");
-            if (posicionesJugadores[jugador] == POSICIONES_OCA_A_OCA[POSICIONES_OCA_A_OCA.length - 1]) {
-              juegoFuncionando = false;
-              ganador = jugador;
-          } else posicionesJugadores[jugador] = POSICIONES_OCA_A_OCA[contadorOcaAOca + 1];
-          }
-          contadorOcaAOca++;
+        System.out.println("Dado: " + dado);
+        
+        int posicionJugador = posicionesJugadores[jugador] + dado;
+
+        if (posicionJugador > TABLERO_SIZE) {
+          posicionJugador = 2 * TABLERO_SIZE - posicionJugador;
         }
-  
+
+        posicionesJugadores[jugador] = posicionJugador;
+        
         System.out.print("ENTER para continuar.");
         System.console().readLine();
   
-        imprimirTablero(tablero, posicionesJugadores);
+        imprimirTablero(posicionesJugadores);
+
+        int siguienteOcaAOca = comprobarSiEsOcaAOca(posicionJugador);
+
+        if (siguienteOcaAOca != -1) {
+          if (posicionJugador != TABLERO_SIZE) {
+            posicionesJugadores[jugador] = siguienteOcaAOca;
+
+            System.out.println("De oca a oca y tiro porque me toca!!");
+            System.out.print("ENTER para continuar.");
+            System.console().readLine();
   
-        System.out.print("ENTER para continuar.");
-        System.console().readLine();
-      }
-    } while (juegoFuncionando);
+            imprimirTablero(posicionesJugadores);
+          }
+        }
+
+        if (posicionJugador == TABLERO_SIZE) {
+          ganador = jugador;
+        } else if (siguienteOcaAOca == -1) jugador++;
+      } while (jugador < 4 && ganador == -1);
+    } while (ganador == -1);
 
 
     System.out.printf("El juego ha terminado! Ha ganado el jugador %s.", JUGADORES[ganador]);
