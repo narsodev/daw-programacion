@@ -21,12 +21,10 @@ public class Ejercicio10 {
       for (int j = 0; j < 3; j++) tablero[i][j] = "";
     }
 
-
     while (ganador.equals("") && contador < 9) {
       int fila, columna;
 
       imprimirTablero(tablero);
-
       
       System.out.print("Turno de");
       
@@ -66,46 +64,34 @@ public class Ejercicio10 {
       
       tablero[fila][columna] = turno;
       
-      boolean juegoFinalizado = false;
-      int continuar = 0;
+      int[] comprobadores = new int[4];
 
-      for (int i = 0; i < 3 && !juegoFinalizado && continuar != -1; i++) {
-        if (tablero[i][columna].equals(turno)) continuar++;
-        else continuar = -1; 
+      for (int i = 0; i < 3; i++) {
+        if (tablero[i][columna].equals(turno)) comprobadores[0]++;
+        else comprobadores[0] = -1; 
+
+        if (tablero[fila][i].equals(turno)) comprobadores[1]++;
+        else comprobadores[1] = -1;
+
+        if (tablero[i][i].equals(turno)) comprobadores[2]++;
+        else comprobadores[2] = -1;
+
+        if (tablero[i][2 - i].equals(turno)) comprobadores[3]++;
+        else comprobadores[3] = -1;
       }
 
-      if (continuar == 3) juegoFinalizado = true;
-      else continuar = 0;
-
-      for (int i = 0; i < 3 && !juegoFinalizado && continuar != -1; i++) {
-        if (tablero[fila][i].equals(turno)) continuar++;
-        else continuar = -1;
-      }
-
-      if (continuar == 3) juegoFinalizado = true;
-      else continuar = 0;
-
-      for (int i = 0; i < 3 && !juegoFinalizado && continuar != -1; i++) {
-        if (tablero[i][i].equals(turno)) continuar++;
-        else continuar = -1;
-      }
-
-      if (continuar == 3) juegoFinalizado = true;
-      else continuar = 0;
-
-      for (int i = 0; i < 3 && !juegoFinalizado && continuar != -1; i++) {
-        if (tablero[i][2 - i].equals(turno)) continuar++;
-        else continuar = -1;
+      for (int i = 0; i < 4 && ganador.equals(""); i++) {
+        if (comprobadores[i] == 3) ganador = turno;
       }
       
-      if (continuar == 3) ganador = turno;
-      else turno = turno.equals(ORDENADOR) ? JUGADOR : ORDENADOR;
+      turno = turno.equals(ORDENADOR) ? JUGADOR : ORDENADOR;
+
       contador++;
     }
 
     imprimirTablero(tablero);
 
-    if (contador == 9) System.out.println("Empate.");
+    if (ganador.equals("")) System.out.println("Empate.");
     else System.out.printf("Enhorabuena, has ganado %s.", (ganador.equals(ORDENADOR) ? "ordenador" : "jugador"));
   }  
 }
