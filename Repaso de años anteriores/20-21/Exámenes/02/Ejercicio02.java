@@ -1,20 +1,20 @@
 public class Ejercicio02 {
   public static void main(String[] args) throws Exception {
     String TEXTO = "FELICES FIESTAS";
-    String[][] pantalla = new String[23][60];
-    String[] nieveTexto = new String[TEXTO.length()];
+    char[][] pantalla = new char[23][60];
+    char[] nieveTexto = new char[TEXTO.length()];
 
 
     for (int fila = 0; fila < 23; fila++) {
       for (int columna = 0; columna < 60; columna++) {
         if (fila == 9 && columna >= 20 && columna < 20 + TEXTO.length()) {
-          pantalla[fila][columna] = String.valueOf(TEXTO.charAt(columna - 20));
-        } else pantalla[fila][columna] = " ";
+          pantalla[fila][columna] = TEXTO.charAt(columna - 20);
+        } else pantalla[fila][columna] = ' ';
       }
     }
 
     for (int i = 0; i < nieveTexto.length; i++) {
-      nieveTexto[i] = " ";
+      nieveTexto[i] = ' ';
     }
 
     while (true) {
@@ -38,7 +38,7 @@ public class Ejercicio02 {
       }
 
       for (int columna = 0; columna < 60; columna++) {
-        pantalla[0][columna] = (int) (Math.random() * 15) == 0 ? "*" : " ";
+        pantalla[0][columna] = (int) (Math.random() * 15) == 0 ? '*' : ' ';
       }
 
       Thread.sleep(600);
