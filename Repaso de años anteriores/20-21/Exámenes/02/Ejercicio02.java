@@ -1,7 +1,9 @@
 public class Ejercicio02 {
   public static void main(String[] args) throws Exception {
-    String[][] pantalla = new String[23][60];
     String TEXTO = "FELICES FIESTAS";
+    String[][] pantalla = new String[23][60];
+    String[] nieveTexto = new String[TEXTO.length()];
+
 
     for (int fila = 0; fila < 23; fila++) {
       for (int columna = 0; columna < 60; columna++) {
@@ -9,6 +11,10 @@ public class Ejercicio02 {
           pantalla[fila][columna] = String.valueOf(TEXTO.charAt(columna - 20));
         } else pantalla[fila][columna] = " ";
       }
+    }
+
+    for (int i = 0; i < nieveTexto.length; i++) {
+      nieveTexto[i] = " ";
     }
 
     while (true) {
@@ -24,7 +30,9 @@ public class Ejercicio02 {
       for (int fila = 22; fila > 0; fila--) {
         for (int columna = 0; columna < 60; columna++) {
           if (fila == 9 && columna >= 20 && columna < 20 + TEXTO.length()) {
-            pantalla[fila + 1][columna] = pantalla[fila - 1][columna];
+            nieveTexto[columna - 20] = pantalla[fila - 1][columna];
+          } else if (fila == 10 && columna >= 20 && columna < 20 + TEXTO.length()) {
+            pantalla[fila][columna] = nieveTexto[columna - 20];
           } else pantalla[fila][columna] = pantalla[fila - 1][columna];
         }
       }
