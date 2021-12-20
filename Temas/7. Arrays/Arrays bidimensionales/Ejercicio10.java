@@ -26,10 +26,10 @@ public class Ejercicio10 {
 
       imprimirTablero(tablero);
       
-      System.out.print("Turno de");
+      System.out.print("Turno del ");
       
       if (turno.equals(ORDENADOR)) {
-        System.out.println(" el ordenador:");
+        System.out.println("ordenador:");
 
         do {
           fila = (int) (Math.random() * 3);
@@ -45,7 +45,7 @@ public class Ejercicio10 {
         System.out.println(columna + 1);
         
       } else {
-        System.out.println("l jugador. Elija una posición:");
+        System.out.println("jugador. Elija una posición:");
         boolean repetir;
 
         do {
