@@ -30,14 +30,7 @@ package paquetes;
 
 public class Ejercicios01_14 {
   public static boolean esCapicua (long num) {
-    boolean capicua = true;
-    int nDigitos = digitos(num);
-
-    for (int i = 0; i < nDigitos && capicua; i++) {
-      if (digitoN(num, i) != digitoN(num, nDigitos - i - 1)) capicua = false;
-    }
-
-    return capicua;
+    return num == voltea(num);
   }
 
   public static boolean esPrimo (long num) {
@@ -53,15 +46,11 @@ public class Ejercicios01_14 {
   }
 
   public static long siguientePrimo (long num) {
-    long primoActual = num;
-    boolean encontrado;
-
     do {
-      primoActual++;
-      encontrado = esPrimo(primoActual);
-    } while (!encontrado);
+      num++;
+    } while (!esPrimo(num));
      
-    return primoActual;
+    return num;
   }
 
   public static long potencia (long num, int exponente) {
@@ -134,12 +123,6 @@ public class Ejercicios01_14 {
   }
 
   public static long juntaNumeros (long num1, long num2) {
-    long resultado = num1;
-
-    for (int i = 0; i < digitos(num2); i++) {
-      resultado = resultado * 10 + digitoN(num2, i);
-    }
-
-    return resultado;
+    return num1 * potencia(10, digitos(num2)) + num2;
   }
 }
