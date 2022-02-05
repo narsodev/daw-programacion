@@ -1,4 +1,4 @@
-# Ejercicio 19
+# Ejercicio 18
 
 Una empresa quiere implementar un programa que lleve el control de las
 incidencias que se producen en sus ordenadores. Cada incidencia tiene un
