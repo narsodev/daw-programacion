@@ -1,6 +1,6 @@
 import Objetos.Incidencia;
 
-public class Ejercicio19 {
+public class Ejercicio18 {
   public static void main(String[] args) {
     Incidencia inc1 = new Incidencia(105, "No tiene acceso a internet");
     Incidencia inc2 = new Incidencia(14, "No arranca");
